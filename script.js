@@ -1,18 +1,17 @@
-const track = document.getElementById('logoTrack');
-let scrollAmount = 0;
+document.querySelectorAll('.logo-track').forEach(track => {
+  track.innerHTML += track.innerHTML;
+  gsap.set(track, { x: 0 });
+  gsap.to(track, {
+    x: () => `-=${track.scrollWidth / 2}`,
+    duration: 20,
+    ease: 'none',
+    repeat: -1
+  });
+});
 
-  // Duplicate logos for seamless loop
-track.innerHTML += track.innerHTML;
-function scrollLogos() {
-    scrollAmount += 1;
-    track.style.transform = `translateX(-${scrollAmount}px)`;
-
-    // Reset scroll when first half has moved completely
-    if (scrollAmount >= track.scrollWidth / 2) {
-      scrollAmount = 0;
-    }
-
-    requestAnimationFrame(scrollLogos);
-}
-
-scrollLogos();
+gsap.to(".carousel-track", {
+   x: "-50%",
+   duration: 20,
+   ease: "linear",
+   repeat: -1,
+});
