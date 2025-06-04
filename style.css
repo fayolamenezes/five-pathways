@@ -435,12 +435,12 @@ body {
 
 .section-eight {
   background-color: #ffffff;
-  padding: 4rem 1rem;
+  padding: 4rem 11rem;
 }
 
 .section-eight-container {
-  background-color: #fef6d4;
-  padding: 3rem 4rem;
+  background-color:#fcefcf;
+  padding: 1rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
   border-radius: 16px;
@@ -474,13 +474,14 @@ body {
 .section-eight-heading {
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
-  font-weight: 590;
-  color: #222;
+  font-weight: 500;
+  color: #000000;
+  line-height: 1.1;
   margin-bottom: 1rem;
 }
 
 .section-eight-description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #444;
   line-height: 1.6;
   margin-bottom: 2rem;
@@ -515,3 +516,39 @@ body {
   cursor: pointer;
 }
 
+.section-nine {
+  padding: 3rem 1rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.section-nine-heading {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-family: 'Playfair Display', serif;
+  color: #333;
+}
+
+.logo-carousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+
+.logo-track {
+  display: flex;
+  gap: 4rem;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.logo-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #777;
+  font-family: 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
