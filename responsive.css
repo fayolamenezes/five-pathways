@@ -13,8 +13,8 @@
 
 /* When menu is open (add this class via JS) */
 .menu-toggle.open {
-  background: black;
-  color: white;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   border-color: black;
 }
 
