@@ -1,4 +1,4 @@
-/*Mobile header*/
+/* Mobile header */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -11,15 +11,33 @@
   left: 0;
   z-index: 1000;
   border-top: 1px solid #eee;
+
+  /* Added font and color for mobile menu links */
+  font-family: 'Playfair Display', serif;
+  color: black;
 }
 
+.mobile-menu a,
+.mobile-menu button,
+.mobile-menu .btn-primary,
+.mobile-menu .help-btn {
+  color: black !important; /* force black text, no blue */
+  font-family: 'Playfair Display', serif;
+  text-decoration: none;
+}
+
+/* The menu toggle button style */
 .menu-toggle {
   display: none;
-  background: none;
-  border: none;
+  background: white;
+  border: 1px solid black;
+  color: black;
+  font-family: 'Playfair Display', serif;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {
