@@ -889,6 +889,9 @@ body {
   overflow: hidden;
 }
 
+.menu-toggle {
+  display: none;
+}
 .image-wrapper img {
   width: 100%;
   height: auto;

@@ -1,6 +1,6 @@
 /* Mobile Toggle Button */
 .menu-toggle {
-  display: block;
+  display: none;
   font-family: 'Playfair Display', serif;
   background: white;
   color: black;
