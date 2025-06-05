@@ -1,13 +1,24 @@
-/* Mobile Menu Styles */
+/* Mobile Toggle Button */
 .menu-toggle {
-  display: none;
-  background: transparent;
-  border: none;
+  display: block;
+  font-family: 'Playfair Display', serif;
+  background: white;
+  color: black;
+  border: 1px solid black;
   font-size: 16px;
+  padding: 10px 16px;
   cursor: pointer;
-  padding: 8px;
+  transition: background 0.3s, color 0.3s;
 }
 
+/* When menu is open (add this class via JS) */
+.menu-toggle.open {
+  background: black;
+  color: white;
+  border-color: black;
+}
+
+/* Mobile Menu Styles */
 .mobile-menu {
   display: none;
   position: fixed;
@@ -20,6 +31,7 @@
   z-index: 999;
   flex-direction: column;
   gap: 16px;
+  font-family: 'Playfair Display', serif;
 }
 
 .mobile-menu a {
@@ -29,6 +41,7 @@
   font-size: 16px;
   padding: 12px 0;
   border-bottom: 1px solid #eee;
+  font-family: 'Playfair Display', serif;
 }
 
 .mobile-menu .btn-primary,

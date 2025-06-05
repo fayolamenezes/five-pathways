@@ -333,12 +333,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-   const menuToggle = document.querySelector(".menu-toggle");
-   const mobileMenu = document.querySelector(".mobile-menu");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
 
-   menuToggle.addEventListener("click", () => {
-     mobileMenu.classList.toggle("active");
-     menuToggle.textContent = mobileMenu.classList.contains("active") ? "Close" : "Menu";
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    const isActive = mobileMenu.classList.contains("active");
+
+    menuToggle.textContent = isActive ? "Close" : "Menu";
+    menuToggle.classList.toggle("open", isActive);
   });
 });
 
