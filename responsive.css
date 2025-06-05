@@ -49,6 +49,12 @@
   margin-top: 12px;
 }
 
+@media (max-width: 768px) {
+  .header-actions .help-btn {
+    display: none;
+  }
+}
+
 /* Tablet Styles */
 @media (max-width: 1024px) {
   .container {
