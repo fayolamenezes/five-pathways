@@ -349,22 +349,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector('.review-cards');
-  const cards = Array.from(container.children);
   const leftArrow = document.querySelector('.arrow-left');
   const rightArrow = document.querySelector('.arrow-right');
+  let cards = Array.from(container.children);
 
-  // Clone first and last card
+  // Clone first and last for infinite effect
   const firstClone = cards[0].cloneNode(true);
   const lastClone = cards[cards.length - 1].cloneNode(true);
   container.appendChild(firstClone);
   container.insertBefore(lastClone, cards[0]);
 
-  const allCards = Array.from(container.children);
+  let allCards = Array.from(container.children);
   let index = 1;
-  let cardWidth = container.offsetWidth;
   let autoScroll;
 
-  // Set container to show only the correct index
+  function getCardWidth() {
+    const card = container.querySelector('.review-card');
+    if (!card) return 0;
+    const style = getComputedStyle(card);
+    const marginRight = parseFloat(style.marginRight) || 0;
+    return card.offsetWidth + marginRight;
+  }
+
+  let cardWidth = getCardWidth();
+
+  // Set container to correct position
   gsap.set(container, { x: -index * cardWidth });
 
   function highlightCenter() {
@@ -426,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
   container.addEventListener("mouseleave", startAutoScroll);
 
   window.addEventListener("resize", () => {
-    cardWidth = container.offsetWidth;
+    cardWidth = getCardWidth();
     gsap.set(container, { x: -index * cardWidth });
   });
 
