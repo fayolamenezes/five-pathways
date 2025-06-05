@@ -1,0 +1,39 @@
+/*Mobile header*/
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  background: white;
+  padding: 2rem;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  border-top: 1px solid #eee;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav,
+  .header-actions {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+}

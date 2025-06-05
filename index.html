@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Five Pathways Financial - A retirement roadmap for everyone</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,34 +13,50 @@
 </head>
 <body>
     <header class="header">
-        <div class="container">
-            <div class="logo">
-                <div class="logo-icon">
-                </div>
-                <div class="logo-text">
-                    <div class="logo-main">FIVE PATHWAYS</div>
-                    <div class="logo-sub">FINANCIAL</div>
-                </div>
-            </div>
-            
-            <nav class="nav">
-                <a href="#" class="nav-link">My Guide</a>
-                <a href="#" class="nav-link">Enlighten</a>
-                <a href="#" class="nav-link">Services</a>
-                <a href="#" class="nav-link">Products</a>
-                <a href="#" class="nav-link">Education</a>
-                <a href="#" class="nav-link">Virtual Office</a>
-                <a href="#" class="nav-link">About</a>
-            </nav>
-            
-            <div class="header-actions">
-                <button class="btn-primary">
-                    Schedule a meeting
-                    <span class="arrow">→</span>
-                </button>
-                <button class="help-btn">?</button>
-            </div>
+    <div class="container">
+        <div class="logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+            <div class="logo-main">FIVE PATHWAYS</div>
+            <div class="logo-sub">FINANCIAL</div>
         </div>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="nav">
+        <a href="#" class="nav-link">My Guide</a>
+        <a href="#" class="nav-link">Enlighten</a>
+        <a href="#" class="nav-link">Services</a>
+        <a href="#" class="nav-link">Products</a>
+        <a href="#" class="nav-link">Education</a>
+        <a href="#" class="nav-link">Virtual Office</a>
+        <a href="#" class="nav-link">About</a>
+        </nav>
+
+        <div class="header-actions">
+        <button class="btn-primary">
+            Schedule a meeting
+            <span class="arrow">→</span>
+        </button>
+        <button class="help-btn">?</button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle">Menu</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#">My Guide</a>
+        <a href="#">Enlighten</a>
+        <a href="#">Services</a>
+        <a href="#">Products</a>
+        <a href="#">Education</a>
+        <a href="#">Virtual Office</a>
+        <a href="#">About</a>
+        <button class="btn-primary">Schedule a meeting <span class="arrow">→</span></button>
+        <button class="help-btn">?</button>
+    </div>
     </header>
 
     <main class="main">
