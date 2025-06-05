@@ -72,26 +72,29 @@ track.addEventListener('mouseleave', () => {
   autoSlide = setInterval(slideNext, 5000);
 });
 
-const path = document.querySelector('#scrollPath path');
-const pathLength = path.getTotalLength();
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
 
-gsap.set(path, {
-  strokeDasharray: pathLength,
-  strokeDashoffset: pathLength,
-  opacity: 0
-});
+  const paths = gsap.utils.toArray('.svg-path-container svg path');
 
-gsap.to(path, {
-  strokeDashoffset: 0,
-  opacity: 1,
-  duration: 2,
-  ease: 'power2.out',
-  scrollTrigger: {
-    trigger: '.svg-path-container',
-    start: 'top 80%',
-    end: 'bottom 60%',
-    scrub: true
-  }
+  paths.forEach(path => {
+    const pathLength = path.getTotalLength();
+
+    path.style.strokeDasharray = pathLength;
+    path.style.strokeDashoffset = pathLength;
+    path.style.opacity = 1;
+
+    ScrollTrigger.create({
+      trigger: path.closest('.svg-path-container'),
+      start: "top 90%", // starts sooner (e.g., top of container hits 90% of viewport)
+      end: "top 40%",   // ends sooner (faster draw finish)
+      scrub: true,
+      onUpdate: self => {
+        path.style.strokeDashoffset = pathLength * (1 - self.progress);
+      },
+      // markers: true,
+    });
+  });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -160,17 +163,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
-
   const title = document.getElementById("animated-title");
 
-  // Replace <br> with token
   const rawText = title.innerHTML.replace(/<br\s*\/?>/gi, " <br> ");
   const words = rawText.split(" ").map(word => word.trim()).filter(Boolean);
-
   title.innerHTML = "";
-
   const spans = [];
-
   words.forEach(word => {
     if (word === "<br>") {
       title.appendChild(document.createElement("br"));
@@ -182,7 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Scroll-triggered animation from center outward
   gsap.to(spans, {
     scrollTrigger: {
       trigger: "#animated-title",
@@ -200,8 +197,178 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const title = document.querySelector('.section-two-title');
+  title.innerHTML = title.textContent.split('').map(char => {
+    if(char === ' ') return `<span>&nbsp;</span>`;
+    return `<span>${char}</span>`;
+  }).join('');
 
+  gsap.to(".section-two-title span", {
+    scrollTrigger: {
+      trigger: ".section-two-title",
+      start: "top 80%",
+      toggleActions: "play none none none",
+    },
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    ease: "power2.out",
+    stagger: 0.05,
+  });
+});
 
+const label = document.querySelector(".section-three-label");
+label.innerHTML = label.textContent
+  .split("")
+  .map(char => `<span>${char}</span>`)
+  .join("");
 
+gsap.fromTo(
+  ".section-three-label span",
+  { opacity: 0, y: 20 },
+  {
+    opacity: 1,
+    y: 0,
+    stagger: 0.1,
+    duration: 0.6,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".section-three-label",
+      start: "top 80%", // when label top hits 80% viewport height
+      toggleActions: "play none none none",
+      // markers: true, // uncomment to debug
+    },
+  }
+);
 
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
 
+  const heading = document.querySelector(".section-three-main-heading");
+  const rawText = heading.getAttribute("data-text");
+  const words = rawText.split(" ");
+
+  heading.innerHTML = ""; // clear existing content
+  const spans = [];
+
+  words.forEach(word => {
+    if (word.toLowerCase() === "your") {
+      heading.appendChild(document.createElement("br")); // start new line
+    }
+
+    const span = document.createElement("span");
+    span.innerHTML = word + "&nbsp;"; // preserve space
+    heading.appendChild(span);
+    spans.push(span);
+  });
+
+  gsap.to(spans, {
+    scrollTrigger: {
+      trigger: heading,
+      start: "top 80%",
+      toggleActions: "play none none none",
+    },
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    ease: "power2.out",
+    stagger: {
+      each: 0.08,
+      from: "center"
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const sections = [
+    ".section-three",
+    ".section-four",
+    ".section-five",
+    ".section-six",
+    ".section-seven"
+  ];
+
+  // Animate the entire section fade/slide on scroll with scrub
+  sections.forEach(selector => {
+    const section = document.querySelector(selector);
+    if (!section) return;
+
+    gsap.set(section, { opacity: 0, y: 40 });
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: self => {
+        const progress = self.progress;
+        const opacity = progress <= 0.5
+          ? gsap.utils.mapRange(0, 0.5, 0, 1, progress)
+          : gsap.utils.mapRange(0.5, 1, 1, 0, progress);
+        const y = progress <= 0.5
+          ? gsap.utils.mapRange(0, 0.5, 40, 0, progress)
+          : gsap.utils.mapRange(0.5, 1, 0, -40, progress);
+
+        gsap.set(section, { opacity, y });
+      }
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Select all specific headings
+  const selectors = [
+    ".section-eight-heading",
+    ".section-ten-heading",
+    ".section-thirteen-heading",
+    ".hero-title",
+    "h3" // assuming you want to animate all h3s too
+  ];
+
+  const headings = document.querySelectorAll(selectors.join(", "));
+
+  headings.forEach(title => {
+    const rawText = title.innerHTML.replace(/<br\s*\/?>/gi, " <br> ");
+    const words = rawText.split(" ").map(word => word.trim()).filter(Boolean);
+
+    title.innerHTML = ""; // Clear original content
+    const spans = [];
+
+    words.forEach(word => {
+      if (word === "<br>") {
+        title.appendChild(document.createElement("br"));
+      } else {
+        const span = document.createElement("span");
+        span.textContent = word;
+        span.style.opacity = 0;
+        span.style.display = "inline-block";
+        span.style.transform = "translateY(20px)";
+        span.style.marginRight = "0.25em";
+        title.appendChild(span);
+        spans.push(span);
+      }
+    });
+
+    // Animate words from center outward on scroll
+    gsap.to(spans, {
+      scrollTrigger: {
+        trigger: title,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      },
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      stagger: {
+        each: 0.08,
+        from: "center"
+      }
+    });
+  });
+});
