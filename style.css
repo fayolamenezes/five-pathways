@@ -45,20 +45,31 @@ body {
 
 /* Navigation Styles */
 .nav {
-    display: flex;
-    gap: 32px;
+  display: flex;
+  gap: 32px;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #333;
-    font-weight: 400;
-    font-size: 11px;
-    transition: color 0.2s ease;
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  font-size: 11px;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.nav-link:hover {
-    color: #5CBDB2;
+.nav-link span {
+  display: inline-block;
+  transform: translateY(0);
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+.nav-link .space {
+  display: inline-block;
+  width: 0.33em; /* or whatever spacing fits visually */
 }
 
 /* Header Actions */
@@ -130,7 +141,7 @@ body {
 
 .hero-btn {
     font-size: 16px;
-    padding: 16px 28px;
+    padding: 0.45rem 1rem !important;
 }
 
 .section-zero {
@@ -162,6 +173,15 @@ body {
   color: #000;
   text-align: center;
   margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.section-one-title span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  margin-right: 6px;
+  white-space: nowrap;
 }
 
 /* Content split into two columns */
@@ -198,17 +218,19 @@ body {
 }
 
 .script-text {
+  display: inline-block;
   font-family: 'Great Vibes', cursive;
   font-size: 36px;
   color: #000;
-  margin-bottom: 8px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .script-underline {
   width: 520px;
   height: 1px;
   background-color: #000;
-  margin-top: -25px;
+  margin-top: -20px;
 }
 
 .section-one-image-top {
@@ -235,7 +257,7 @@ body {
 
 .section-two {
   padding: 60px 20px;
-  background-color:#fffaf5;
+  background-color: #fffaf5;
 }
 
 .section-two-content {
@@ -252,24 +274,58 @@ body {
   color: #000;
 }
 
-.review-cards {
+.svg-path-container {
   display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 40px;
+  padding: 60px 0;
 }
 
+.carousel-container {
+  position: relative;
+  width: 1500px; /* visible area */
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* Carousel track */
+.review-cards {
+  display: flex !important; /* override any other flex-wrap */
+  gap: 24px;
+  justify-content: center;
+  width: 1500px; /* visible cards area */
+  overflow: visible;
+  user-select: none;
+  cursor: grab;
+  margin-bottom: 0; /* remove default margin */
+}
+
+/* Cards */
 .review-card {
+  flex: 0 0 260px;
   background: #fff;
   padding: 24px;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  width: 260px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  opacity: 1;
+  transform: scale(0.8);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Center active card styling */
+.review-card.center {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  z-index: 10;
 }
 
 .review-text {
@@ -296,9 +352,35 @@ body {
   margin-top: 4px;
 }
 
+.arrow {
+  font-size: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 20px;
+  color: #555;
+  transition: color 0.2s ease, transform 0.2s ease; /* Add transform to transition */
+}
+
+.arrow:hover {
+  color: #000;
+  transform: translateX(5px); /* Move slightly to the right */
+}
+
+.arrow-left {
+  margin-right: 10px;
+}
+
+.arrow-right {
+  margin-left: 10px;
+}
+
+/* Primary hero button */
 .section-two .btn-primary.hero-btn {
   display: inline-block;
   margin: 0 auto;
+  padding: 0.45rem 1rem !important;
 }
 
 .section-three {
@@ -490,7 +572,7 @@ body {
 }
 
 .btn-primary {
-  padding: 0.45rem 1rem;
+  padding: 0.45rem 1rem !important;
   background-color: #64d1c5;
   color: #000;
   border: none;
@@ -617,12 +699,6 @@ body {
   font-size: 0.8rem;
   line-height: 1.6;
   flex-grow: 1;
-}
-
-.arrow {
-  font-size: 1.5rem;
-  color: #000;
-  margin-top: 1.5rem;
 }
 
 .section-eleven {
@@ -983,7 +1059,7 @@ p {
 }
 
 .btn-submit {
-  padding: 0.75rem 1.5rem;
+  padding: 0.1rem 1rem;
   background-color: #64d1c5;
   color: #000;
   border: none;
@@ -1049,4 +1125,57 @@ p {
   height: auto;
   display: block;
   margin: 0;
+}
+
+.help-btn,
+.hero-btn,
+.section-three-btn,
+.btn-primary,
+.btn-secondary,
+.btn-submit {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform;
+  transform-origin: bottom right; /* This makes scaling focus toward bottom-right */
+}
+
+.help-btn:hover,
+.hero-btn:hover,
+.section-three-btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-submit:hover {
+  transform: scale(0.95);   /* Slight shrink toward bottom-right */
+  box-shadow: none;
+}
+
+.help-btn:active,
+.hero-btn:active,
+.section-three-btn:active,
+.btn-primary:active,
+.btn-secondary:active,
+.btn-submit:active {
+  transform: scale(0.94);  
+  box-shadow: none;
+}
+
+.btn-primary .arrow {
+  display: inline-block;              /* Needed for transform to work */
+  vertical-align: middle;             /* Prevent extra height offset */
+  line-height: 0.3;                     /* Eliminate added line spacing */
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.btn-primary:hover .arrow {
+  transform: translateX(10px);        /* Shift arrow right on hover */
+}
+
+.btn-submit .arrow {
+  display: inline-block;         
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.btn-submit:hover .arrow {
+  transform: translateX(10px);  
 }

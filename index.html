@@ -52,7 +52,6 @@
         Schedule a meeting <span class="arrow">→</span>
         </button>
         
-        <!-- Image below the button -->
         <div class="hero-image-wrapper">
         <img src="image1 .png" alt="Retirement Graphic" class="hero-image" />
         </div>
@@ -80,8 +79,8 @@
             <img src="image4.png" alt="Top image" />
         </div>
 
-        <h1 class="section-one-title">
-            Get directions on<br>the road to retirement
+        <h1 class="section-one-title" id="animated-title">
+        Get directions on<br>the road to retirement
         </h1>
 
         <div class="section-one-content">
@@ -106,38 +105,44 @@
         <div class="section-two-content">
             <h1 class="section-two-title">Journeys from the past</h1> 
 
+            <div class="carousel-container">
+            <button class="arrow arrow-left" aria-label="Previous">&#8592;</button>
+
             <div class="review-cards">
-            <div class="review-card">
+                <div class="review-card">
                 <p class="review-text">"The guidance I received gave me clarity and confidence."</p>
                 <div class="review-name-block">
-                <span class="review-name">Alex R.</span>
-                <div class="name-underline"></div>
+                    <span class="review-name">Alex R.</span>
+                    <div class="name-underline"></div>
                 </div>
-            </div>
+                </div>
 
-            <div class="review-card">
+                <div class="review-card">
                 <p class="review-text">"Truly life-changing insights on my retirement path."</p>
                 <div class="review-name-block">
-                <span class="review-name">Jamie L.</span>
-                <div class="name-underline"></div>
+                    <span class="review-name">Jamie L.</span>
+                    <div class="name-underline"></div>
                 </div>
-            </div>
+                </div>
 
-            <div class="review-card">
+                <div class="review-card">
                 <p class="review-text">"I finally feel ready for the next chapter."</p>
                 <div class="review-name-block">
-                <span class="review-name">Morgan T.</span>
-                <div class="name-underline"></div>
+                    <span class="review-name">Morgan T.</span>
+                    <div class="name-underline"></div>
+                </div>
+                </div>
+
+                <div class="review-card">
+                <p class="review-text">"So grateful for the support and personal approach."</p>
+                <div class="review-name-block">
+                    <span class="review-name">Taylor S.</span>
+                    <div class="name-underline"></div>
+                </div>
                 </div>
             </div>
 
-            <div class="review-card">
-                <p class="review-text">"So grateful for the support and personal approach."</p>
-                <div class="review-name-block">
-                <span class="review-name">Taylor S.</span>
-                <div class="name-underline"></div>
-                </div>
-            </div>
+            <button class="arrow arrow-right" aria-label="Next">&#8594;</button>
             </div>
 
             <button class="btn-primary hero-btn">
@@ -175,6 +180,21 @@
             </div>
         </div>
         </section>
+
+        <div class="svg-path-container">
+        <svg id="scrollPath" width="708" height="253" viewBox="0 0 708 253" xmlns="http://www.w3.org/2000/svg">
+            <path
+            d="M10,10 
+                C10,100 300,100 600,100 
+                C700,100 700,200 698,240"
+            stroke="black"
+            stroke-width="2"
+            fill="none"
+            stroke-dasharray="1,10"
+            stroke-linecap="round"
+            />
+        </svg>
+        </div>
 
         <section class="section-four">
         <div class="section-three-flex">
@@ -252,7 +272,7 @@
                 We’ll work with you to create a personalized strategy that incorporates all of the paths of retirement planning by focusing on what is most important to you.
                 </p>
                 <div class="section-eight-buttons">
-                <button class="btn-primary">Schedule a meeting →</button>
+                <button class="btn-primary">Schedule a meeting <span class="arrow">→</span></button>
                 <button class="btn-secondary">Contact</button>
                 </div>
             </div>
@@ -476,7 +496,7 @@
                 <textarea rows="4"></textarea>
                 </label>
 
-                <button type="submit" class="btn-submit">Submit ➝</button>
+                <button type="submit" class="btn-submit">Submit<span class="arrow">→</span></button>
 
                 <div class="form-notes">
                 <div class="required-note">* Required field</div>
@@ -507,6 +527,8 @@
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
     <script src="script.js"></script>
 
 </body>
