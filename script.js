@@ -31,47 +31,6 @@ gsap.from(text.chars, {
   ease: "power2.out"
 });
 
-const track = document.querySelector('.review-cards');
-const cards = document.querySelectorAll('.review-card');
-const leftBtn = document.querySelector('.arrow-left');
-const rightBtn = document.querySelector('.arrow-right');
-
-let cardWidth = cards[0].offsetWidth + 24; // card width + gap
-let position = 0;
-
-track.innerHTML += track.innerHTML; // Duplicate cards for seamless loop
-
-function moveToPosition(x) {
-  gsap.to(track, { x: x, duration: 1, ease: 'power1.inOut' });
-  position = x;
-}
-
-function slideNext() {
-  if (Math.abs(position) >= cardWidth * (cards.length)) {
-    position = 0;
-    gsap.set(track, { x: 0 });
-  }
-  moveToPosition(position - cardWidth);
-}
-
-function slidePrev() {
-  if (position === 0) {
-    position = -cardWidth * cards.length;
-    gsap.set(track, { x: position });
-  }
-  moveToPosition(position + cardWidth);
-}
-
-leftBtn.addEventListener('click', slidePrev);
-rightBtn.addEventListener('click', slideNext);
-
-let autoSlide = setInterval(slideNext, 5000);
-
-track.addEventListener('mouseenter', () => clearInterval(autoSlide));
-track.addEventListener('mouseleave', () => {
-  autoSlide = setInterval(slideNext, 5000);
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
 
@@ -381,4 +340,92 @@ document.addEventListener("DOMContentLoaded", () => {
      mobileMenu.classList.toggle("active");
      menuToggle.textContent = mobileMenu.classList.contains("active") ? "Close" : "Menu";
   });
+});
+
+gsap.registerPlugin(ScrollTrigger);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector('.review-cards');
+  const cards = Array.from(container.children);
+  const leftArrow = document.querySelector('.arrow-left');
+  const rightArrow = document.querySelector('.arrow-right');
+
+  // Clone first and last card
+  const firstClone = cards[0].cloneNode(true);
+  const lastClone = cards[cards.length - 1].cloneNode(true);
+  container.appendChild(firstClone);
+  container.insertBefore(lastClone, cards[0]);
+
+  const allCards = Array.from(container.children);
+  let index = 1;
+  let cardWidth = container.offsetWidth;
+  let autoScroll;
+
+  // Set container to show only the correct index
+  gsap.set(container, { x: -index * cardWidth });
+
+  function highlightCenter() {
+    allCards.forEach(card => card.classList.remove('center'));
+    if (allCards[index]) {
+      allCards[index].classList.add('center');
+    }
+  }
+  highlightCenter();
+
+  function moveToIndex(newIndex) {
+    gsap.to(container, {
+      duration: 0.5,
+      x: -newIndex * cardWidth,
+      ease: "power2.out",
+      onComplete: () => {
+        if (newIndex === allCards.length - 1) {
+          index = 1;
+          gsap.set(container, { x: -index * cardWidth });
+        } else if (newIndex === 0) {
+          index = allCards.length - 2;
+          gsap.set(container, { x: -index * cardWidth });
+        }
+        highlightCenter();
+      }
+    });
+    index = newIndex;
+  }
+
+  function nextSlide() {
+    moveToIndex(index + 1);
+  }
+
+  function prevSlide() {
+    moveToIndex(index - 1);
+  }
+
+  function startAutoScroll() {
+    autoScroll = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoScroll() {
+    clearInterval(autoScroll);
+  }
+
+  rightArrow.addEventListener('click', () => {
+    stopAutoScroll();
+    nextSlide();
+    startAutoScroll();
+  });
+
+  leftArrow.addEventListener('click', () => {
+    stopAutoScroll();
+    prevSlide();
+    startAutoScroll();
+  });
+
+  container.addEventListener("mouseenter", stopAutoScroll);
+  container.addEventListener("mouseleave", startAutoScroll);
+
+  window.addEventListener("resize", () => {
+    cardWidth = container.offsetWidth;
+    gsap.set(container, { x: -index * cardWidth });
+  });
+
+  startAutoScroll();
 });
